@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./logs.css"
+import "./Components/styles/logs.css"
 
 const Home = () => {
     return ( 

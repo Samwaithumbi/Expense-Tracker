@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "./logs.css";
+import "./Components/styles/logs.css"
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { UserProvider } from "./usercontext";
-import { UserContext } from "./usercontext";
+import { setDoc,doc} from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth,db } from "./Components/firebase";
+import {toast} from "react-toastify"
 
-const Signup = () => {
+const Signu = () => {
   const [userName, setUserName]=useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,35 +14,38 @@ const Signup = () => {
   const [registerStatus, setRegisterStatus]=useState("")
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }else{
-      setError("")
-    }
+  const handleRegister= async(e)=>{
+    e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:4000/register', {
-        email: email,
-        password: password,
-        userName:userName
-      });
-
-      setRegisterStatus(response.data)
+      await createUserWithEmailAndPassword(auth,email,password)
+      const user=auth.currentUser
+      console.log(user);
+      if (user) {
+        await setDoc(doc(db, "Users", user.uid), {
+            email:user.email,
+            userName:userName
+        })
+      }
+      console.log("User Registered successfully");
+      toast.success("You have registered successfully", {
+        position:"top-center",
+    })
     } catch (error) {
-      console.error('Error registering:', error);
-      setError("Error registering. Please try again.");
+        console.log(error.message);
+        toast.error(error.message, {
+            position:"bottom-center",
+        })
+        
     }
-  };
+  }
+
 
   return (
-    <UserProvider>
     <div className="sgn-up">
       <div className="signup-container">
         <h2>Sign Up</h2>
         <div className="inputs">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleRegister}>
             <input type="text"
              placeholder="Username"
              name="username"
@@ -74,15 +78,13 @@ const Signup = () => {
             />
             {registerStatus&& <p>{registerStatus}</p>}
             {error && <p className="error-message">{error}</p>}
-            <button className="signup-btn" type="submit">Sign Up</button>
+            <button className="signup-btn" type="submit" onClick={handleRegister}>Sign Up</button>
           </form>
         </div>
         <p>Already have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
-  
-  </UserProvider>
   )
 };
 
-export default Signup;
+export default Signu;

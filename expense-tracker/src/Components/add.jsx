@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Balance from "./balance";
 import Transactions from "./transactions";
+import axios from "axios";
 
 const Add = () => {
   const [tempIncomeValue, setTempIncomeValue] = useState("0");
@@ -9,6 +10,9 @@ const Add = () => {
   const [storedExpense, setStoredExpense] = useState("0");
   const [transactions, setTransactions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+
+ 
+
 
   useEffect(() => {
     const storedIncome = localStorage.getItem('income');
@@ -33,7 +37,16 @@ const Add = () => {
     localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
   };
 
-  const handleAddIncome = () => {
+  const handleAddIncome = async() => {
+     try{
+        const incomeData=await axios.post("http://localhost:4000/incomes",{
+          tempIncomeValue:tempIncomeValue
+        })
+        setStoredIncome(incomeData)
+     }catch(error){
+      console.error('Error storing income:', error);
+     }
+
     const newIncomeValue = parseFloat(storedIncome) + parseFloat(tempIncomeValue);
     setStoredIncome(newIncomeValue.toString());
     localStorage.setItem('income', newIncomeValue.toString());

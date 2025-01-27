@@ -1,12 +1,26 @@
 body{
     background-color: midnightblue;
 }
-.time-container{
-    font-size: 15px;
-    margin-top: 0;
-    
-}
+
 /* Time.css */
+.t-container{
+  display: flex;
+  justify-content: space-between;
+}
+.logout-btn{
+  margin-top: 20px;
+  margin-right: 0px;
+  background-color: #ff6347; /* Tomato color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+}
+.logout-btn:hover {
+  background-color: #ee5a36; /* Darker shade of tomato */
+}
 .time-container {
     display: flex;
     flex-direction: column;
@@ -33,55 +47,55 @@ body{
   
 /* Balance.css */
 .balance-container {
-    background-color: beige;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    margin: 20px auto;
-    text-align: center;
-  }
-  
-  .b-container {
-    padding: 20px;
-    background-color:wheat;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .b-container h2 {
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .b-container h1 {
-    font-size: 2em;
-    color: #007bff;
-  }
-  
-  .income-expense {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .income, .expense {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    width: 45%;
-  }
-  
-  .income h3, .expense h3 {
-    margin-bottom: 10px;
-    color: #007bff;
-  }
-  
-  .income h2, .expense h2 {
-    color: #333;
-  }
-  
+  background-color: beige;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.b-container {
+  padding: 20px;
+  background-color: wheat;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.b-container h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.b-container h1 {
+  font-size: 2em;
+  color: #007bff;
+}
+
+.income-expense {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.income, .expense {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  width: 45%;
+}
+
+.income h3, .expense h3 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.income h2, .expense h2 {
+  color: #333;
+}
+
 /* Transactions.css */
 .transaction-container {
     background-color: #f9f9f9;

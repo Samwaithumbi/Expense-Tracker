@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const Balance = ({ storedIncome, storedExpense }) => {
+const Balance = () => {
+  const storedIncome = localStorage.getItem("income");
+  const storedExpense = localStorage.getItem("expenses");
+
   // Convert to number and handle NaN
   const income = isNaN(parseFloat(storedIncome)) ? 0 : parseFloat(storedIncome);
   const expense = isNaN(parseFloat(storedExpense)) ? 0 : parseFloat(storedExpense);
@@ -12,7 +15,6 @@ const Balance = ({ storedIncome, storedExpense }) => {
     setBalance(income - expense);
   }, [income, expense]);
 
-  
   return (
     <div className="balance-container">
       <div className="b-container">
